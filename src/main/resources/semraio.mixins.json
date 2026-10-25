@@ -1,0 +1,9 @@
+{
+  "required": true,
+  "package": "br.com.semraio.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "client": ["LightningBoltRendererMixin"],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

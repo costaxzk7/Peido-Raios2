@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "id": "semraio",
+  "version": "${version}",
+  "name": "SemRaio",
+  "description": "Client-side mod that attempts to hide the visible lightning model.",
+  "authors": ["SemRaio"],
+  "environment": "client",
+  "mixins": ["semraio.mixins.json"],
+  "depends": {
+    "fabricloader": ">=0.18.1",
+    "minecraft": "1.21.11",
+    "java": ">=21"
+  }
+}
