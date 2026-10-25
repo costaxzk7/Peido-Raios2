@@ -1,31 +1,33 @@
-plugins {
-    id 'fabric-loom' version '1.14-SNAPSHOT'
-}
+name: Peido Raios
 
-version = project.mod_version
-group = project.maven_group
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
 
-base {
-    archivesName = project.archives_base_name
-}
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
 
-dependencies {
-    minecraft "com.mojang:minecraft:${project.minecraft_version}"
-    mappings loom.officialMojangMappings()
-    modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
-    modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
-}
+      - name: Set up Java 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
 
-processResources {
-    inputs.property "version", project.version
-    filesMatching("fabric.mod.json") {
-        expand "version": project.version
-    }
-}
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v4
 
-java {
-    toolchain {
-        languageVersion = JavaLanguageVersion.of(21)
-    }
-    withSourcesJar()
-}
+      - name: Build mod
+        run: gradle build --no-daemon
+
+      - name: Upload JAR
+        uses: actions/upload-artifact@v4
+        with:
+          name: SemRaio-Fabric-1.21.11
+          path: build/libs/*.jar
+          
